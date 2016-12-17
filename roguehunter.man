@@ -67,7 +67,7 @@ The script has very little input error checking.
 .SH HISTORY
 The script was created to deal with extreme process hogs created by 
 .I Mega
-on a Caldera Open Unix host. Access to the system is achieved through
+on a \fICaldera Open Unix\fR host. Access to the system is achieved through
 terminal emulation from PCs. I suspect that the PCs are shutdown without
 ending the telnet/ssh session and that as a consequence SIGHUP is never
 sent to host. When the telnet session is broken the login process is 
