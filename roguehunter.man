@@ -1,0 +1,81 @@
+.TH RHOST 8l "1 October r1.5
+.SH NAME
+.B roguehunter
+- identify and terminate rogue processes 
+.SH SYNOPSIS
+.B roguehunter
+[
+.B -c 
+.I <config_file>
+] [
+.B -d
+] [
+.B -v
+]
+.SH AVAILABILITY
+.B roguehunter
+is a Bourne shell script which should work equally well on all versions of UNIX,
+Linux and even bloody UnixWare.
+.SH DESCRIPTION
+.LP
+The 
+.B roguehunter
+is at present server specific. Tests to identify rogue processes are hard
+coded into the script.
+.LP
+The script attempts to kill processes with SIGHUP in order allow a clean termination.No attempt is made to use SIGKILL if termination fails.
+.LP
+A terse record of the attempted kills are maintained in the log file.
+.B roguehunter
+.SH OPTIONS
+.TP 5
+.B -c
+.I <configuration_file>
+.LP
+The configuration file is at present unused. 
+.TP 5
+.B -d
+.LP
+The debug mode echos all actions to standard error. 
+.LP
+.TP 5
+.B -v
+.LP
+Verbose mode, the script will run with the 
+.B -x
+option set.
+.SH EXAMPLES
+.IP
+.nf
+.ft CW
+	roguehunter
+.fi
+.ft R
+.LP
+Identify rogue processes (cpu hogs) on the current host using the criteria hard coded
+in the script and terminate them.
+.IP
+.ft CW
+	roguehunter -d
+.ft R
+.LP
+As above but echo each line to standard error.
+.SH FILES
+.IR roguehunter.cf .
+.SH BUGS
+The script has very little input error checking. 
+.SH HISTORY
+The script was created to deal with extreme process hogs created by 
+.I Mega
+on a Caldera Open Unix host. Access to the system is achieved through
+terminal emulation from PCs. I suspect that the PCs are shutdown without
+ending the telnet/ssh session and that as a consequence SIGHUP is never
+sent to host. When the telnet session is broken the login process is 
+attached to \fIinit\fR and the application process smn12 becomes a process
+hog. The script therefore is essentially concerned with processor hogs 
+identified as smn12 and the associated \fBksh\fR login although it could
+be easily modified to use a config script which identified other target
+names. Other processes that are identified as a potential problem are
+added to the log files for further consideration.
+.SH AUTHOR
+Clifford W Fulford, City Linux. Contact fulford@fulford.net or +44 (0)709 229 5385.
